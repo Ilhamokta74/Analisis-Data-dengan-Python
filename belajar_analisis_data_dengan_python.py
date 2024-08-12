@@ -195,7 +195,7 @@ data_december_2012 = hour[(hour['yr'] == 1) & (hour['mnth'] == 12)]
 
 # Membuat grafik batang untuk bulan Desember 2012
 plt.figure(figsize=(12, 6))  # Menetapkan ukuran grafik
-plt.bar(data_december_2012['dteday'], data_december_2012['cnt'], color='skyblue')  # Grafik batang dengan warna latar belakang
+plt.bar(data_december_2012['dteday'], data_december_2012['cnt'])  # Grafik batang dengan warna latar belakang
 plt.title('Jumlah Penyewaan Sepeda pada Desember 2012')  # Menambahkan judul grafik
 plt.xlabel('Tanggal')  # Menambahkan label sumbu x
 plt.ylabel('Jumlah Penyewaan')  # Menambahkan label sumbu y
