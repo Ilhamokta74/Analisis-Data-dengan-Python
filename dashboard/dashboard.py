@@ -7,13 +7,12 @@ import plotly.express as px
 
 st.title('Proyek Analisis Data: Bike sharing')
 st.markdown("""
-- **Nama:** Chelsa Rachel Wibowo
-- **Email:** chelsarachelwibowo@gmail.com
-- **ID Dicoding:** chelsarachel
+- **Nama:** Ilham Oktavian
+- **Email:** ilhamoktavian74@gmail.com
+- **ID Dicoding:** ilham_oktavian_74
 """)
 
-url = 'https://drive.google.com/uc?id=14vZd0xgkZgxEVqgLlQYWxhAxO9f3_ob3'
-hour = pd.read_csv(url)
+hour = pd.read_csv('hour.csv')
 
 Q1 = (hour['cnt']).quantile(0.25)
 Q3 = (hour['cnt']).quantile(0.75)
@@ -82,27 +81,10 @@ st.markdown("""
 """)
 
 
-st.subheader("Total terpinjam pada bulan November 2012")
-total = hour[(hour['yr'] == 1) & (hour['mnth'] == 11)]['cnt'].sum()
+st.subheader("Total terpinjam pada bulan Desember 2012")
+total = hour[(hour['yr'] == 1) & (hour['mnth'] == 12)]['cnt'].sum()
 st.write("Total terpinjam pada bulan November 2012:", total)
 
-
-st.subheader("Musim dimana sepeda paling ramai dan sepi dipinjam")
-jumlahpermusim = hour.groupby('season')['cnt'].sum().reset_index()
-jumlahpermusim = hour.groupby('season')['cnt'].sum().reset_index()
-ramai = jumlahpermusim.loc[jumlahpermusim['cnt'].idxmax()]
-sepi = jumlahpermusim.loc[jumlahpermusim['cnt'].idxmin()]
-def season_name(season):
-    if season == 1:
-        return 'musim dingin'
-    elif season == 2:
-        return 'musim semi'
-    elif season == 3:
-        return 'musim panas'
-    elif season == 4:
-        return 'musim gugur'
-st.write("Musim dengan pinjaman sepeda paling ramai:", season_name(ramai['season']))
-st.write("Musim dengan pinjaman sepeda paling sepi:", season_name(sepi['season']))
 
 def plot_bulanan_streamlit(data):
     bulan = data.groupby(pd.Grouper(key='dteday', freq='M')).sum()
@@ -127,8 +109,7 @@ if __name__ == "__main__":
 
 st.header("Conclusion")
 st.markdown("""
-- Total sepeda terpinjam pada bulan November 2012 yaitu 138.423
-- Orang-orang paling banyak meminjam sepeda pada musim panas sedangkan paling sedikit pada musim dingin
+- Total sepeda terpinjam pada bulan Desember 2012 yaitu 114.538
 - Dari bulan januari hingga mei peminjaman sepeda terus meningkat, sempat turun sedikit pada bulan juni, dan naik kembali pada bulan juli (bulan dengan jumlah peminjaman terbanyak selama tahun 2012),namun setelah bulan juli jumlah peminjaman sepeda terus berkurang
 - Berdasarkan matriks korelasi didapatkan faktor yang paling berpengaruh yaitu jam peminjaman. Dan berdasarkan distribusinya, sepeda paling sering dipinjam pada pukul 4 sore hingga 7 malam
 - Selain jam, suhu juga sangat berpengaruh pada minat meminjam. Suhu yang dirasa nyaman untuk bersepeda yakni pada suhu 0.6 hingga 0.7 Celsius
