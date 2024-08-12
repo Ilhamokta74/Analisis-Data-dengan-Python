@@ -82,9 +82,31 @@ st.markdown("""
 - Pertanyaan 2: Bagaimana kinerja peminjaman dalam setahun terakhir?
 """)
 
-st.subheader("Total terpinjam pada bulan Desember 2012")
-total = hour[(hour['yr'] == 1) & (hour['mnth'] == 12)]['cnt'].sum()  # Mengubah bulan ke Desember (11)
-st.write("Total terpinjam pada bulan Desember 2012:", total)
+
+def plot_harian_streamlit(data):
+    # Menyiapkan grafik
+    fig, ax = plt.subplots(figsize=(10, 3))
+    
+    # Membuat grafik batang harian
+    ax.bar(data['dteday'], data['cnt'], color='wheat')
+    
+    # Menetapkan elemen-elemen pada grafik
+    ax.set_xticks(data['dteday'])
+    ax.set_xticklabels(data['dteday'].dt.strftime('%d'), color='white', rotation=45)
+    ax.set_yticklabels(ax.get_yticks(), color='white')
+    ax.set_xlabel('Tanggal', color='white')
+    ax.set_ylabel('Jumlah Penyewaan', color='white')
+    ax.grid(True, axis='y', linestyle='--', alpha=0.7, color='white')
+    
+    # Menetapkan warna latar belakang dan garis tepi
+    ax.set_facecolor('#00172B') 
+    fig.patch.set_facecolor('#00172B') 
+    for spine in ax.spines.values():
+        spine.set_edgecolor('white')
+    
+    # Menampilkan grafik di Streamlit
+    st.pyplot(fig)
+
 
 def plot_bulanan_streamlit(data):
     bulan = data.groupby(pd.Grouper(key='dteday', freq='M')).sum()
@@ -103,6 +125,11 @@ def plot_bulanan_streamlit(data):
     st.pyplot(fig)
 
 def main():
+    st.subheader("Total terpinjam pada bulan Desember 2012")
+    plot_harian_streamlit(hour[(hour['yr'] == 1) & (hour['mnth'] == 12)])
+    total = hour[(hour['yr'] == 1) & (hour['mnth'] == 12)]['cnt'].sum()  # Mengubah bulan ke Desember (11)
+    st.write("Total terpinjam pada bulan Desember 2012:", total)
+
     st.subheader("Kinerja Peminjaman dalam Setahun Terakhir")
     plot_bulanan_streamlit(hour[hour['yr'] == 1])
 

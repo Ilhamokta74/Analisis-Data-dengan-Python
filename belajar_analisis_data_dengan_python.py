@@ -190,9 +190,23 @@ plt.show()  # Menampilkan heatmap
 ### Pertanyaan 1: Berapa total terpinjam pada bulan Desember 2012?
 """
 
-total = hour[(hour['yr'] == 1) & (hour['mnth'] == 12)]['cnt'].sum()
+# Memfilter data untuk bulan Desember 2012
+data_december_2012 = hour[(hour['yr'] == 1) & (hour['mnth'] == 12)]
 
-print("Total terpinjam pada bulan Desember 2012:", total)
+# Membuat grafik batang untuk bulan Desember 2012
+plt.figure(figsize=(12, 6))  # Menetapkan ukuran grafik
+plt.bar(data_december_2012['dteday'], data_december_2012['cnt'], color='skyblue')  # Grafik batang dengan warna latar belakang
+plt.title('Jumlah Penyewaan Sepeda pada Desember 2012')  # Menambahkan judul grafik
+plt.xlabel('Tanggal')  # Menambahkan label sumbu x
+plt.ylabel('Jumlah Penyewaan')  # Menambahkan label sumbu y
+plt.grid(True, axis='y', linestyle='--', alpha=0.7)  # Menambahkan grid pada sumbu y
+plt.xticks(rotation=45)  # Memutar label sumbu x untuk keterbacaan yang lebih baik
+plt.tight_layout()  # Menyesuaikan tata letak untuk mencegah pemotongan
+plt.show()  # Menampilkan grafik
+
+# Menghitung total jumlah penyewaan sepeda pada bulan Desember 2012
+total = data_december_2012['cnt'].sum()
+print("\n Total terpinjam pada bulan Desember 2012:", total)
 
 """### Pertanyaan 2: Bagaimana kinerja peminjaman dalam setahun terakhir?"""
 
