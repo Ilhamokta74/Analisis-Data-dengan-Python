@@ -56,7 +56,7 @@ for feature in fitur:
     fig.update_layout(yaxis_title='Jumlah peminjam')
     st.plotly_chart(fig)
 
-categories = ['season', 'yr', 'holiday', 'workingday', 'weathersit']
+categories = ['yr', 'holiday', 'workingday', 'weathersit']
 def show_pie_charts(categories):
     for category in categories: 
         fig = px.pie(hour, names=category, values='cnt', title=f'Distribusi Jumlah Penyewaan Berdasarkan {category}')
@@ -76,8 +76,7 @@ st.pyplot(fig)
 st.header('Pertanyaan Bisnis')
 st.markdown("""
 - Pertanyaan 1 : Berapa total terpinjam pada bulan November 2012?
-- Pertanyaan 2 : Sepeda paling ramai dan sepi dipinjam pada musim apa?
-- Pertanyaan 3 : Bagaimana kinerja peminjaman dalam setahun terakhir?
+- Pertanyaan 2 : Bagaimana kinerja peminjaman dalam setahun terakhir?
 """)
 
 
@@ -110,7 +109,6 @@ if __name__ == "__main__":
 st.header("Conclusion")
 st.markdown("""
 - Total sepeda terpinjam pada bulan Desember 2012 yaitu 114.538
-- Dari bulan januari hingga mei peminjaman sepeda terus meningkat, sempat turun sedikit pada bulan juni, dan naik kembali pada bulan juli (bulan dengan jumlah peminjaman terbanyak selama tahun 2012),namun setelah bulan juli jumlah peminjaman sepeda terus berkurang
+- Bulan januari hingga mei peminjaman sepeda Mengalami peningkat, Mengalami sedikit penurunan pada bulan juni, namun naik kembali pada bulan juli (pada bulan ini tercapai peminjaman terbanyak pada tahun 2012), namun setelah bulan juli jumlah peminjaman sepeda mengalami penurunan hingga akhir tahun 2012
 - Berdasarkan matriks korelasi didapatkan faktor yang paling berpengaruh yaitu jam peminjaman. Dan berdasarkan distribusinya, sepeda paling sering dipinjam pada pukul 4 sore hingga 7 malam
-- Selain jam, suhu juga sangat berpengaruh pada minat meminjam. Suhu yang dirasa nyaman untuk bersepeda yakni pada suhu 0.6 hingga 0.7 Celsius
 """)
